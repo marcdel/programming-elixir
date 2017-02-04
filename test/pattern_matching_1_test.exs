@@ -1,4 +1,4 @@
-defmodule PatternMatchingTest do
+defmodule PatternMatching1Test do
   use ExUnit.Case
   
   test "a = [1,2,3]" do
