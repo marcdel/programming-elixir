@@ -39,4 +39,8 @@ defmodule ListExtensions do
   end
 
   def take(list, n), do: hd(split(list, n))
+
+  def flatten([]), do: []
+  def flatten([ head | tail ]), do: flatten(head) ++ flatten(tail)
+  def flatten(head), do: [ head ]
 end
