@@ -15,4 +15,28 @@ defmodule ListExtensions do
   def span(from, to), do: Enum.to_list from..to
   def recursive_span(from, to) when from > to, do: []
   def recursive_span(from, to), do: [from | recursive_span(from+1, to)]
+
+  def all?([], _func), do: true
+  def all?([head | tail], func), do: func.(head) && all?(tail, func)
+
+  def each([], _func), do: []
+  def each([head | tail], func), do: [func.(head) | each(tail, func)]
+
+  def filter([], _func), do: []
+  def filter([head | tail], func) do
+    if(func.(head)) do
+      [head | filter(tail, func)]
+    else
+      filter(tail, func)
+    end
+  end
+
+  def split(list, count), do: split(list, [], count)
+  defp split([], front, _), do: [ Enum.reverse(front), [] ]
+  defp split(tail, front, 0), do: [ Enum.reverse(front), tail ]
+  defp split([ head | tail ], front, count)  do
+    split(tail, [head|front], count-1)
+  end
+
+  def take(list, n), do: hd(split(list, n))
 end
