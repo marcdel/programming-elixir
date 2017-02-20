@@ -3,16 +3,10 @@ defmodule FizzBuzz do
     1..n |> Enum.map(&fizzbuzz/1)
   end
 
-  defp fizzbuzz(n) do
-    cond do
-      rem(n, 3) == 0 and rem(n, 5) == 0 -> 
-        "FizzBuzz"
-      rem(n, 3) == 0 ->
-        "Fizz"
-      rem(n, 5) == 0 -> 
-        "Buzz"
-      true ->
-        n
-    end
-  end
+  defp fizzbuzz(n), do: do_fizzbuzz(n, rem(n, 3), rem(n, 5))
+
+  defp do_fizzbuzz(_n, 0, 0), do: "FizzBuzz"
+  defp do_fizzbuzz(_n, 0, _), do: "Fizz"
+  defp do_fizzbuzz(_n, _, 0), do: "Buzz"
+  defp do_fizzbuzz( n, _, _), do: n
 end
