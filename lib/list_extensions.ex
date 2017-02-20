@@ -43,4 +43,9 @@ defmodule ListExtensions do
   def flatten([]), do: []
   def flatten([ head | tail ]), do: flatten(head) ++ flatten(tail)
   def flatten(head), do: [ head ]
+
+  def primes_to(n) do
+    range = span(2, n)
+    range -- (for a <- range, b <- range, a <= b, a * b <= n, do: a * b)
+  end
 end
