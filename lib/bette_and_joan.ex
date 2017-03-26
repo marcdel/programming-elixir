@@ -8,8 +8,8 @@ defmodule BetteAndJoan do
 
   def run do
     for _ <- 1..10 do
-      Enum.random([:bette, :joan])
-      |> create_process
+      name = Enum.random([:bette, :joan])
+      create_process(name)
     end
   end
 

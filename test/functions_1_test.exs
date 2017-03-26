@@ -17,8 +17,8 @@ defmodule Functions1Test do
   end
 
   test "pair_tuple_to_list" do
-    pair_tuple_to_list = fn { a, b } -> [ a, b ] end
-    assert pair_tuple_to_list.({ 1234, 5678 }) == [1234, 5678]
+    pair_tuple_to_list = fn {a, b} -> [a, b] end
+    assert pair_tuple_to_list.({1234, 5678}) == [1234, 5678]
   end
 
 end

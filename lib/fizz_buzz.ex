@@ -8,5 +8,5 @@ defmodule FizzBuzz do
   defp do_fizzbuzz(_n, 0, 0), do: "FizzBuzz"
   defp do_fizzbuzz(_n, 0, _), do: "Fizz"
   defp do_fizzbuzz(_n, _, 0), do: "Buzz"
-  defp do_fizzbuzz( n, _, _), do: n
+  defp do_fizzbuzz(n, _, _), do: n
 end

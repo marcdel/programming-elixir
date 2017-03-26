@@ -1,22 +1,22 @@
 defmodule Parallel do
   def pmap(collection, fun) do
-    me = self
+    me = self()
     collection
     |> Enum.map(fn (elem) ->
-      spawn_link fn -> (send me, { self, fun.(elem) }) end
+      spawn_link fn -> (send me, {self(), fun.(elem)}) end
     end)
     |> Enum.map(fn (pid) ->
-      receive do { ^pid, result } -> result end
+      receive do {^pid, result} -> result end
     end)
   end
 
   def rando_pmap(collection, fun) do
-    me = self
+    me = self()
     collection
     |> Enum.map(fn (elem) ->
       spawn_link fn -> (send me, fun.(elem)) end
     end)
-    |> Enum.map(fn (pid) ->
+    |> Enum.map(fn (_pid) ->
       receive do result -> result end
     end)
   end

@@ -8,13 +8,13 @@ defmodule ListExtensions do
   def max([max]), do: max
   def max([head | tail]), do: Kernel.max(head, max(tail))
 
-  def ceasar([], n), do: []
+  def ceasar([], _n), do: []
   def ceasar([head | tail], n) when head + n <= ?z, do: [head + n | ceasar(tail, n)]
   def ceasar([head | tail], n), do: [head + n - 26 | ceasar(tail, n)]
 
   def span(from, to), do: Enum.to_list from..to
   def recursive_span(from, to) when from > to, do: []
-  def recursive_span(from, to), do: [from | recursive_span(from+1, to)]
+  def recursive_span(from, to), do: [from | recursive_span(from + 1, to)]
 
   def all?([], _func), do: true
   def all?([head | tail], func), do: func.(head) && all?(tail, func)
@@ -32,17 +32,17 @@ defmodule ListExtensions do
   end
 
   def split(list, count), do: split(list, [], count)
-  defp split([], front, _), do: [ Enum.reverse(front), [] ]
-  defp split(tail, front, 0), do: [ Enum.reverse(front), tail ]
-  defp split([ head | tail ], front, count)  do
-    split(tail, [head|front], count-1)
+  defp split([], front, _), do: [Enum.reverse(front), []]
+  defp split(tail, front, 0), do: [Enum.reverse(front), tail]
+  defp split([head | tail], front, count)  do
+    split(tail, [head | front], count - 1)
   end
 
   def take(list, n), do: hd(split(list, n))
 
   def flatten([]), do: []
-  def flatten([ head | tail ]), do: flatten(head) ++ flatten(tail)
-  def flatten(head), do: [ head ]
+  def flatten([head | tail]), do: flatten(head) ++ flatten(tail)
+  def flatten(head), do: [head]
 
   def primes_to(n) do
     range = span(2, n)

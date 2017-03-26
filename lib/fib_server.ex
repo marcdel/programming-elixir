@@ -1,12 +1,12 @@
 defmodule FibSolver do
 
   def fib(scheduler) do
-    send scheduler, { :ready, self() }
+    send scheduler, {:ready, self()}
     receive do
-      { :fib, n, client } ->
-        send client, { :answer, n, fib_calc(n), self() }
+      {:fib, n, client} ->
+        send client, {:answer, n, fib_calc(n), self()}
         fib(scheduler)
-      { :shutdown } ->
+      {:shutdown} ->
         exit(:normal)
     end
   end
@@ -14,7 +14,7 @@ defmodule FibSolver do
   # very inefficient, deliberately
   defp fib_calc(0), do: 0
   defp fib_calc(1), do: 1
-  defp fib_calc(n), do: fib_calc(n-1) + fib_calc(n-2)
+  defp fib_calc(n), do: fib_calc(n - 1) + fib_calc(n - 2)
 end
 
 defmodule Scheduler do
@@ -28,7 +28,7 @@ defmodule Scheduler do
   defp schedule_processes(processes, queue, results) do
     receive do
       {:ready, pid} when length(queue) > 0 ->
-        [ next | tail ] = queue
+        [next | tail] = queue
         send pid, {:fib, next, self()}
         schedule_processes(processes, tail, results)
 
@@ -41,7 +41,7 @@ defmodule Scheduler do
         end
 
       {:answer, number, result, _pid} ->
-        schedule_processes(processes, queue, [ {number, result} | results ])
+        schedule_processes(processes, queue, [{number, result} | results])
     end
   end
 end
@@ -60,7 +60,7 @@ defmodule FibSolver.Client do
         IO.puts inspect result
         IO.puts "\n #   time (s)"
       end
-      :io.format "~2B     ~.2f~n", [num_processes, time/1000000.0]
+      :io.format "~2B     ~.2f~n", [num_processes, time/1_000_000.0]
     end
   end
 end

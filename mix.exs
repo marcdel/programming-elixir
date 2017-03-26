@@ -29,8 +29,9 @@ defmodule ProgrammingElixir.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      { :triq, github: "triqng/triq", only: :test },
-      { :excheck,  "~> 0.5.0", only: :test }
+      {:triq, github: "triqng/triq", only: :test},
+      {:excheck,  "~> 0.5.0", only: :test},
+      {:credo, "~> 0.7", only: [:dev, :test]}
     ]
   end
 end

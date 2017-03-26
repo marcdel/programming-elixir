@@ -1,6 +1,6 @@
 defmodule PatternMatching1Test do
   use ExUnit.Case
-  
+
   test "a = [1,2,3]" do
     a = [1,2,3]
     assert a == [1,2,3]
@@ -19,7 +19,7 @@ defmodule PatternMatching1Test do
 
   test "[a,b] = [1,2,3]" do
     assert_raise MatchError, fn ->
-      [a,b] = [1,2,3]
+      [_a,_b] = [1,2,3]
     end
   end
 
@@ -35,7 +35,7 @@ defmodule PatternMatching1Test do
 
   test "[[a]] = [[1,2,3]]" do
     assert_raise MatchError, fn ->
-      [[a]] = [[1,2,3]]
+      [[_a]] = [[1,2,3]]
     end
   end
 end

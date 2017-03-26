@@ -8,7 +8,8 @@ defmodule Chain do
 
   def create_processes(n) do
     last = Enum.reduce 1..n, self(), fn (_,send_to) ->
-      # Each time we spawn a new process, we pass it the previous process’s PID in the send_to parameter.
+      # Each time we spawn a new process,
+      # we pass it the previous process’s PID in the send_to parameter.
       spawn(Chain, :counter, [send_to])  # returns pid to next iteration
     end
 

@@ -11,11 +11,11 @@ defmodule Chop do
     actual
   end
 
-  defp do_guess(guess, actual, low..high) when (guess > actual) do
-    guess(actual, low..guess-1)
+  defp do_guess(guess, actual, low.._high) when (guess > actual) do
+    guess(actual, low..guess - 1)
   end
 
-  defp do_guess(guess, actual, low..high) when (guess < actual) do
-    guess(actual, guess+1..high)
+  defp do_guess(guess, actual, _low..high) when (guess < actual) do
+    guess(actual, guess + 1..high)
   end
 end

@@ -8,7 +8,7 @@ defmodule Functions2Test do
       _, 0, _ -> "Buzz"
       _, _, n -> n
     end
-    
+
     assert fizz_buzz.(0,0,1) == "FizzBuzz"
     assert fizz_buzz.(0,1,1) == "Fizz"
     assert fizz_buzz.(1,0,1) == "Buzz"

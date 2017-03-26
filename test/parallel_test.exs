@@ -1,6 +1,6 @@
 defmodule ParallelTest do
   use ExUnit.Case
-  import :timer, only: [ sleep: 1 ]
+  import :timer, only: [sleep: 1]
 
   # With 50 elements doing a long running taskrando_pmap should always
   # return at least one element out of order, but pmap should always be correct.

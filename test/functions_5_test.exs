@@ -8,7 +8,7 @@ defmodule Functions5Test do
   end
 
   test "inline each" do
-    result = Enum.each [1,2,3,4], &Integer.is_even/1 
+    result = Enum.each [1,2,3,4], &Integer.is_even/1
     assert result == :ok
   end
 end

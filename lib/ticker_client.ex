@@ -6,9 +6,9 @@ defmodule TickerClient do
 
   def receiver do
     receive do
-      { :tick } ->
+      {:tick} ->
         IO.puts "tock in client"
-        receiver
+        receiver()
     end
   end
 end
