@@ -1,4 +1,14 @@
 defmodule Chain do
+  @moduledoc """
+  Creates n processes and returns the total time taken
+  and the counter of the final process.
+  Chain.run 10
+  """
+
+  def run(n) do
+    IO.puts inspect :timer.tc(Chain, :create_processes, [n])
+  end
+
   def counter(next_pid) do
     receive do
       n ->
@@ -19,9 +29,5 @@ defmodule Chain do
       final_answer when is_integer(final_answer) ->
         "Result is #{inspect(final_answer)}"
     end
-  end
-
-  def run(n) do
-    IO.puts inspect :timer.tc(Chain, :create_processes, [n])
   end
 end

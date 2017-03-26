@@ -1,10 +1,10 @@
 defmodule BetteAndJoan do
-  def do_work do
-    receive do
-      name ->
-        IO.inspect {:ok, name}
-    end
-  end
+  @moduledoc """
+  BetteAndJoan.run creates processes with either :bette or :joan
+  which then output the name received.
+
+  elixir -r lib/bette_and_joan.ex -e "BetteAndJoan.run()"
+  """
 
   def run do
     for _ <- 1..10 do
@@ -13,13 +13,20 @@ defmodule BetteAndJoan do
     end
   end
 
-  def create_process :bette do
+  def do_work do
+    receive do
+      name ->
+        IO.inspect {:ok, name}
+    end
+  end
+
+  defp create_process :bette do
     IO.puts "Spawning #{:bette}"
     bette = spawn(BetteAndJoan, :do_work, [])
     send bette, :bette
   end
 
-  def create_process :joan do
+  defp create_process :joan do
     IO.puts "Spawning #{:joan}"
     joan = spawn(BetteAndJoan, :do_work, [])
     send joan, :joan
