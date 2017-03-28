@@ -16,16 +16,16 @@ defmodule StackServer do
     GenServer.start_link __MODULE__, [], name: __MODULE__
   end
 
-  def push(pid, item) do
-    GenServer.cast pid, {:push, item}
+  def push(item) do
+    GenServer.cast __MODULE__, {:push, item}
   end
 
-  def pop(pid) do
-    GenServer.call pid, :pop
+  def pop do
+    GenServer.call __MODULE__, :pop
   end
 
-  def get(pid) do
-    GenServer.call pid, :get
+  def get do
+    GenServer.call __MODULE__, :get
   end
 
   def handle_cast({:push, item}, state) do
