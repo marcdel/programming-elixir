@@ -1,4 +1,15 @@
 defmodule StackServer do
+  @moduledoc """
+  Simple stack implemented with a genserver.
+
+  ## Examples:
+
+      iex> {:ok, pid} = StackServer.start_link
+      iex> StackServer.push pid, 1
+      iex> StackServer.pop pid
+      1
+  """
+
   use GenServer
 
   def start_link do
@@ -36,4 +47,12 @@ defmodule StackServer do
   def handle_call(request, from, state) do
     super(request, from, state)
   end
+
+  @doc """
+  Used to format the output of `:sys.get_status pid`
+  """
+  def format_status(_reason, [_pdict, state]) do
+    [data: [{'State', "The current value of the stack is'#{inspect state}'."}]]
+  end
+
 end
