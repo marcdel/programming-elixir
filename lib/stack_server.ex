@@ -13,7 +13,11 @@ defmodule StackServer do
   use GenServer
 
   def start_link do
-    GenServer.start_link __MODULE__, [], name: __MODULE__
+    StackServer.start_link []
+  end
+
+  def start_link stack do
+    GenServer.start_link __MODULE__, stack, name: __MODULE__
   end
 
   def push(item) do
