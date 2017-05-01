@@ -52,6 +52,11 @@ defmodule StackServer do
     super(request, from, state)
   end
 
+  def terminate(reason, state) do
+    IO.puts "Terminating for reason: #{reason}, with state: #{inspect state}"
+    :shutdown
+  end
+
   @doc """
   Used to format the output of `:sys.get_status pid`
   """
