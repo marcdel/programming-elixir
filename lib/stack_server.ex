@@ -1,13 +1,6 @@
 defmodule StackServer do
   @moduledoc """
   Simple stack implemented with a genserver.
-
-  ## Examples:
-
-      iex> {:ok, pid} = StackServer.start_link
-      iex> StackServer.push pid, 1
-      iex> StackServer.pop pid
-      1
   """
 
   use GenServer
@@ -20,6 +13,10 @@ defmodule StackServer do
     GenServer.start_link __MODULE__, stack, name: __MODULE__
   end
 
+  def clear do
+    GenServer.cast __MODULE__, :clear
+  end
+
   def push(item) do
     GenServer.cast __MODULE__, {:push, item}
   end
@@ -30,6 +27,10 @@ defmodule StackServer do
 
   def get do
     GenServer.call __MODULE__, :get
+  end
+
+  def handle_cast(:clear, state) do
+    {:noreply, []}
   end
 
   def handle_cast({:push, item}, state) do
