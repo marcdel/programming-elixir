@@ -17,7 +17,7 @@ defmodule ProgrammingElixir.Mixfile do
     # Specify extra applications you'll use from Erlang/Elixir
     [
       extra_applications: [:logger],
-      mod: {StackServer.Application, []}
+      mod: {StackSupervisor, []}
     ]
   end
 
