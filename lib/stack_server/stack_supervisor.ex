@@ -1,22 +1,19 @@
 defmodule StackSupervisor do
-  # See http://elixir-lang.org/docs/stable/elixir/Application.html
-  # for more information on OTP Applications
-  @moduledoc false
+  use Supervisor
+  def start_link(initial_value) do
+    result = {:ok, sup} = Supervisor.start_link(__MODULE__, [initial_value])
+    start_workers(sup, initial_value)
+    result
+  end
 
-  use Application
+  def start_workers(sup, initial_value) do
+    {:ok, stash_pid} =
+       Supervisor.start_child(sup, worker(StackServer.Stash, [initial_value]))
 
-  def start(_type, _args) do
-    import Supervisor.Spec, warn: false
+    Supervisor.start_child(sup, supervisor(StackServer, [stash_pid]))
+  end
 
-    # Define workers and child supervisors to be supervised
-    children = [
-      # Starts a worker by calling: Maths.Worker.start_link(arg1, arg2, arg3)
-      worker(StackServer, []),
-    ]
-
-    # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
-    # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: StackServer.Supervisor]
-    Supervisor.start_link(children, opts)
+  def init(_) do
+    supervise [], strategy: :one_for_one
   end
 end
