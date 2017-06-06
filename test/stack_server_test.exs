@@ -1,4 +1,6 @@
 defmodule StackServerTest do
+  @moduledoc """
+  """
   use ExUnit.Case
 
   setup do
