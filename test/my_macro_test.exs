@@ -25,4 +25,26 @@ defmodule MyMacroTest do
       end
     end
   end
+
+  describe "unless" do
+    test "evaluates first clause if false" do
+      a = 1
+      b = 1
+      MyMacro.unless a == b do
+        assert false
+      else
+        assert true
+      end
+    end
+
+    test "evaluates second clause if true" do
+      a = 1
+      b = 2
+      MyMacro.unless a == b do
+        assert true
+      else
+        assert false
+      end
+    end
+  end
 end
